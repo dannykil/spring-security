@@ -20,23 +20,23 @@ import java.util.List;
 
 // ex01 - InMemoryUserDetailsService
 // @Configuration를 삽입하지 않았더니 시큐리티 기본 설정만 적용되고 아래 설정은 적용되지 않음
-//@Configuration
-//public class ProjectConfig {
-//
-//    @Bean
-//    public UserDetailsService userDetailsService() {
-//        System.out.println("ProjectConfig");
-//        UserDetails user = new User("john", "12345", "read");
-//
-//        List<UserDetails> users = List.of(user);
-//        return new InMemoryUserDetailsService(users);
-//    }
-//
-//    @Bean
-//    public PasswordEncoder passwordEncoder() {
-//        return NoOpPasswordEncoder.getInstance();
-//    }
-//}
+@Configuration
+public class ProjectConfig {
+
+    @Bean
+    public UserDetailsService userDetailsService() {
+        System.out.println("ProjectConfig");
+        UserDetails user = new User("john", "12345", "read");
+
+        List<UserDetails> users = List.of(user);
+        return new InMemoryUserDetailsService(users);
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return NoOpPasswordEncoder.getInstance();
+    }
+}
 
 // ex02 - JdbcUserDetailsManager
 //@Configuration
@@ -62,25 +62,24 @@ import java.util.List;
 //}
 
 // ex03 - LdapUserDetailsManager
-@Configuration
-public class ProjectConfig extends WebSecurityConfigurerAdapter {
-
-    @Override
-    @Bean
-    public UserDetailsService userDetailsService() {
-        var cs = new DefaultSpringSecurityContextSource("ldap://127.0.0.1:33389/dc=springframework,dc=org");
-        cs.afterPropertiesSet();
-
-        LdapUserDetailsManager manager = new LdapUserDetailsManager(cs);
-        manager.setUsernameMapper(
-                new DefaultLdapUsernameToDnMapper("ou=groups", "uid"));
-        manager.setGroupSearchBase("ou=groups");
-        return manager;
-    }
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return NoOpPasswordEncoder.getInstance();
-    }
-
-}
+//@Configuration
+//public class ProjectConfig extends WebSecurityConfigurerAdapter {
+//
+//    @Override
+//    @Bean
+//    public UserDetailsService userDetailsService() {
+//        var cs = new DefaultSpringSecurityContextSource("ldap://127.0.0.1:33389/dc=springframework,dc=org");
+//        cs.afterPropertiesSet();
+//
+//        LdapUserDetailsManager manager = new LdapUserDetailsManager(cs);
+//        manager.setUsernameMapper(
+//                new DefaultLdapUsernameToDnMapper("ou=groups", "uid"));
+//        manager.setGroupSearchBase("ou=groups");
+//        return manager;
+//    }
+//
+//    @Bean
+//    public PasswordEncoder passwordEncoder() {
+//        return NoOpPasswordEncoder.getInstance();
+//    }
+//}
