@@ -15,7 +15,7 @@ import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import javax.sql.DataSource;
 import java.util.List;
 
-// ex01
+// ex01 - InMemoryUserDetailsService
 // @Configuration를 삽입하지 않았더니 시큐리티 기본 설정만 적용되고 아래 설정은 적용되지 않음
 //@Configuration
 //public class ProjectConfig {
@@ -35,7 +35,7 @@ import java.util.List;
 //    }
 //}
 
-// ex02
+// ex02 - JdbcUserDetailsManager
 @Configuration
 public class ProjectConfig extends WebSecurityConfigurerAdapter {
 
